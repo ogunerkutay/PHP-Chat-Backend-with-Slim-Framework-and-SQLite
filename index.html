@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Application</title>
+</head>
+<body>
+  <h1>Chat Application</h1>
+
+  <h2>Register</h2>
+  <input type="text" id="register-username" placeholder="Username">
+  <input type="password" id="register-password" placeholder="Password">
+  <button onclick="registerUser()">Register</button>
+
+  <h2>Login</h2>
+  <input type="text" id="login-username" placeholder="Username">
+  <input type="password" id="login-password" placeholder="Password">
+  <button onclick="loginUser()">Login</button>
+
+  <h2>Send Message</h2>
+  <input type="number" id="message-user-id" placeholder="User ID">
+  <input type="text" id="message-content" placeholder="Message">
+  <button onclick="sendUserMessage()">Send</button>
+
+  <h2>Fetch Messages</h2>
+  <button onclick="fetchMessages()">Fetch Messages</button>
+
+  <script>
+async function register(username, password) {
+    try {
+        const response = await fetch("http://localhost:8000/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            console.log("Registration successful");
+            return true;
+        } else {
+            console.log(data);
+            console.log("Registration failed");
+            return false;
+        }
+    } catch (error) {
+        console.log("Error:", error);
+        return false;
+    }
+}
+
+
+
+async function login(username, password) {
+  const response = await fetch('http://localhost:8000/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ username, password })
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+  } else {
+    console.error('Login failed');
+  }
+}
+
+
+async function sendMessage(user_id, content) {
+  const response = await fetch('http://localhost:8000/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ user_id, content })
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+  } else {
+    console.error('Sending message failed');
+  }
+}
+
+
+async function fetchMessages() {
+  const response = await fetch('http://localhost:8000/messages');
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+  } else {
+    console.error('Fetching messages failed');
+  }
+}
+
+
+    // Register user button handler
+    function registerUser() {
+      const username = document.getElementById('register-username').value;
+      const password = document.getElementById('register-password').value;
+      register(username, password);
+    }
+
+    // Login user button handler
+    function loginUser() {
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      login(username, password);
+    }
+
+    // Send message button handler
+    function sendUserMessage() {
+      const user_id = document.getElementById('message-user-id').value;
+      const content = document.getElementById('message-content').value;
+      sendMessage(user_id, content);
+    }
+  </script>
+</body>
+</html>

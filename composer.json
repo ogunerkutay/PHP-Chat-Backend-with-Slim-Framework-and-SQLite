@@ -1,0 +1,24 @@
+{
+    "name": "ogunerkutay/chat-backend",
+    "description": "A simple chat application backend using Slim framework and SQLite.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Ogün Erkutay",
+        "email": "77350593+ogunerkutay@users.noreply.github.com"
+      }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+      "slim/slim": "^4.11",
+      "slim/psr7": "^1.6",
+      "tuupola/cors-middleware": "^1.4"
+    },
+    "autoload": {
+      "psr-4": {
+        "Ogunerkutay\\ChatBackend\\": "src/ChatBackend/"
+      }
+    }
+  }
+  
