@@ -27,4 +27,5 @@ POST /register: Register a new user with a username and password.
 POST /login: Log in with a registered user's credentials.
 POST /messages: Send a new message as a logged-in user.
 GET /messages: Retrieve all messages in the chat.
-Please note that this project serves as a backend for chat applications and does not include a frontend. To use this backend, create a frontend application (e.g., using React, Angular, Vue.js, or Blazor WebAssembly) that communicates with the API endpoints provided by this backend.
+Please note that this project serves as a backend for chat applications and does not include a frontend.
+To use this backend, create a frontend application (e.g., using React, Angular, Vue.js, or Blazor WebAssembly) that communicates with the API endpoints provided by this backend.
